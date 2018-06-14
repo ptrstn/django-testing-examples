@@ -1,0 +1,20 @@
+language: python
+python:
+  - "3.5"
+  - "3.6"
+
+env:
+  - DJANGO_VERSION=1.11
+  - DJANGO_VERSION=2.0
+
+install:
+  - pip install -I Django==$DJANGO_VERSION
+  - pip install -r testing-requirements.txt
+
+before_script:
+script:
+  - PYTHONWARNINGS=all pytest --cov=.
+  - python -Wall manage.py test
+
+after_success:
+  - codecov
