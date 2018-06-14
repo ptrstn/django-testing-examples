@@ -34,5 +34,7 @@ class TestMyCreateView:
         req = RequestFactory().post(reverse("myapp:mycreateview"), data=data)
         resp = views.MyCreateView.as_view()(req)
         assert resp.status_code == 302, "Should redirect to success url"
+        assert resp.url == "create_success/"
         assert MyModel.objects.all().exists()
         assert MyModel.objects.all()[0].name == "Hans"
+

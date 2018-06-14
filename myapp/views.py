@@ -10,4 +10,4 @@ class MyView(generic.TemplateView):
 class MyCreateView(generic.CreateView):
     model = models.MyModel
     form_class = forms.MyModelForm
-    success_url = "/"
+    success_url = "/create_success/"
