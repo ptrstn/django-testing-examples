@@ -1,9 +1,8 @@
 import pytest
 from django.contrib.auth.models import AnonymousUser, User
-from mixer.backend.django import mixer
-
 from django.test import RequestFactory
 from django.urls import reverse
+from mixer.backend.django import mixer
 
 from myapp import views
 from myapp.models import MyModel
@@ -68,4 +67,19 @@ class TestMyUpdateView:
         assert my_model.name == "Dieter"
         my_model.refresh_from_db()
         assert my_model.name == "Hans"
-        assert len(MyModel.objects.all()) == 1
+        assert len(MyModel.objects.all()) == 1, "Should be no new objects"
+
+    def test_invalid_data(self):
+        my_model = mixer.blend("myapp.MyModel", name="Dieter")
+        data = {
+            "name": "Hans"
+        }
+        req = RequestFactory().post(reverse("myapp:myupdateview", kwargs={'pk': my_model.pk}), data=data)
+        req.user = mixer.blend(User)
+
+        resp = views.MyUpdateView.as_view()(req, pk=my_model.pk)
+        assert resp.status_code == 200, "should not redirect to success url, when data is invalid"
+        assert my_model.name == "Dieter"
+        my_model.refresh_from_db()
+        assert my_model.name == "Dieter", "Name should not have changed"
+        assert len(MyModel.objects.all()) == 1, "Should be no new objects"
