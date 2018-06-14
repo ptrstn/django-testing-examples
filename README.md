@@ -2,8 +2,8 @@
 [![codecov](https://codecov.io/gh/ptrstn/django-testing-examples/branch/master/graph/badge.svg)](https://codecov.io/gh/ptrstn/django-testing-examples)
 # Django Testing Examples
 
-**How this project was created:**
-```python
+### Create this project
+```bash
 mkdir django-testing-examples
 cd django-testing-examples
 python -m venv venv
@@ -16,3 +16,10 @@ python manage.py startapp myapp
 python manage.py migrate
 ```
 
+### Test for Deprecation Warnings
+If you want to upgrade from Django 1.11 to Django 2.0 you need to make sure that there are no DeprecationWarnings:
+```bash
+PYTHONWARNINGS=all pytest
+# or
+python -Wall manage.py test
+```
