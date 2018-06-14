@@ -5,6 +5,7 @@ from django.urls import reverse
 from mixer.backend.django import mixer
 
 from myapp import views
+from myapp.forms import MyModelForm
 from myapp.models import MyModel
 
 pytestmark = pytest.mark.django_db
@@ -82,4 +83,23 @@ class TestMyUpdateView:
         assert my_model.name == "Dieter"
         my_model.refresh_from_db()
         assert my_model.name == "Dieter", "Name should not have changed"
+        assert len(MyModel.objects.all()) == 1, "Should be no new objects"
+
+    def test_valid_form_data(self):
+        my_model = mixer.blend("myapp.MyModel", name="Dieter")
+        data = {
+            "name": "Hans",
+            "other_model": mixer.blend("myapp.MyOtherModel").pk
+        }
+
+        form = MyModelForm(data=data)
+        assert form.is_valid()
+        req = RequestFactory().post(reverse("myapp:myupdateview", kwargs={'pk': my_model.pk}), data=form.data)
+        req.user = mixer.blend(User)
+
+        resp = views.MyUpdateView.as_view()(req, pk=my_model.pk)
+        assert resp.status_code == 302, "should redirect to success url"
+        assert my_model.name == "Dieter"
+        my_model.refresh_from_db()
+        assert my_model.name == "Hans", "Name should have changed"
         assert len(MyModel.objects.all()) == 1, "Should be no new objects"
