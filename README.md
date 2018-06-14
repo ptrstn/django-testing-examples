@@ -27,6 +27,16 @@ PYTHONWARNINGS=all pytest
 python -Wall manage.py test
 ```
 
+### Test with PyCharm
+ - do "Test this repository" steps then open folder with PyCharm
+
+ - File -> Settings -> Tools -> Python Integrated tools ->
+Default test runner: py.test -> OK
+
+ - Run -> Run... ->  Edit Configuratinos... -> + -> Python tests -> py.test -> Name: pytest -> OK
+
+ - Run -> 'pytest'
+
 ### How this project was created
 ```bash
 mkdir django-testing-examples
