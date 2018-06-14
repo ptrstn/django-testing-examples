@@ -14,6 +14,9 @@ class TestMyModelForm:
         form = MyModelForm(data=data)
 
         assert False is form.is_valid()
+        assert form.errors
+        assert "other_model" in form.errors, "other_model cant be null"
+
         other_model = mixer.blend("myapp.MyOtherModel")
         data = {
             "name": "Hans",
@@ -21,3 +24,4 @@ class TestMyModelForm:
         }
         form = MyModelForm(data=data)
         assert True is form.is_valid()
+        assert not form.errors, "Should be no errors, when form is valid"
