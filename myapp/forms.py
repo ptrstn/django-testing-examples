@@ -6,7 +6,7 @@ from myapp.models import MyModel
 class MyModelForm(forms.ModelForm):
     class Meta:
         model = MyModel
-        fields = ['name', 'other_model']
+        fields = ['name', 'other_model', 'nullable_other', 'comment']
 
     def clean_name(self):
         data = self.cleaned_data['name']
