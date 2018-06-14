@@ -5,4 +5,6 @@ from . import views
 app_name = 'myapp'
 urlpatterns = [
     url(r'^mypath/$', views.MyView.as_view(), name='myview'),
+    url(r'^create/$', views.MyView.as_view(), name='mycreateview'),
+
 ]
