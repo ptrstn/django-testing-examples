@@ -16,7 +16,7 @@ python manage.py startapp myapp
 python manage.py migrate
 ```
 ### Test this repository
-```python
+```bash
 git clone https://github.com/ptrstn/django-testing-examples.git
 cd django-testing-examples
 python -m venv venv
@@ -27,7 +27,7 @@ pytest
 ```
 
 ### Generate HTML coverage report
-```python
+```bash
 pytest --cov=. --cov-report=html
 chromium htmlcov/index.html
 ```
