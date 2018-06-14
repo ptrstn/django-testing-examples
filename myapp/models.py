@@ -7,4 +7,4 @@ class MyOtherModel(models.Model):
 
 class MyModel(models.Model):
     name = models.CharField(max_length=30)
-    other_model = models.ForeignKey(MyOtherModel, on_delete=models.CASCADE )
+    other_model = models.ForeignKey(MyOtherModel, on_delete=models.CASCADE)
