@@ -10,8 +10,9 @@ TEST_PASSWORD = "VerySecurePasswort"
 def firefox():
     """returns a Firefox browser webdriver instance"""
     options = webdriver.FirefoxOptions()
-    options.add_argument('headless')
+    options.add_argument('--headless')
     firefox_webdriver = webdriver.Firefox(firefox_options=options)
+    firefox_webdriver.implicitly_wait(10)
     yield firefox_webdriver
     firefox_webdriver.quit()
 
