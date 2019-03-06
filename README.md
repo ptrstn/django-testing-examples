@@ -50,3 +50,8 @@ django-admin startproject django_testing_examples .
 python manage.py startapp myapp
 python manage.py migrate
 ```
+
+# Resources
+
+The Django Test Driven Development Cookbook:
+- https://www.youtube.com/watch?v=41ek3VNx_6Q
