@@ -9,9 +9,8 @@ jobs:
     runs-on: python:latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          python -m venv venv
-          source venv/bin/activate
+      - run: python -m venv venv
+      - run: source venv/bin/activate
       - run: pip install django==1.11
       - run: pip install -r testing-requirements.txt
       - run: pytest
