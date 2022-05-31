@@ -1,19 +1,17 @@
 name: Run Checks
 
-on: 
+on:
   pull_request:
-    branches: 
+    branches:
       - master
-
 jobs:
   merge-check:
     runs-on: python:latest
-
     steps:
       - uses: actions/checkout@v3
       - run: |
-        - python -m venv venv
-        - source venv/bin/activate
+          python -m venv venv
+          source venv/bin/activate
       - run: pip install django==1.11
       - run: pip install -r testing-requirements.txt
       - run: pytest
