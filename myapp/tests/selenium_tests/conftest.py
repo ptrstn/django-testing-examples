@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 from selenium import webdriver
 
 TEST_USERNAME = "example"
-TEST_PASSWORD = "VerySecurePasswort"
+TEST_PASSWORD = "VerySecurePassword"
 
 
 @pytest.fixture
